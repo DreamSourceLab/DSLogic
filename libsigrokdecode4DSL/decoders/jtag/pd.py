@@ -200,18 +200,18 @@ class Decoder(srd.Decoder):
                     self.ss_bitstring = self.samplenum
 
                 if self.bits_cnt > 1:
-                    self.putx([16, [str(self.bits_tdi[0])]])
-                    self.putx([17, [str(self.bits_tdo[0])]])
+                    self.putx([16, [str(self.bits_tdi[-1])]])
+                    self.putx([17, [str(self.bits_tdo[-1])]])
                     # Use self.samplenum as ES of the previous bit.
-                    self.bits_samplenums_tdi[0][1] = self.samplenum
-                    self.bits_samplenums_tdo[0][1] = self.samplenum
+                    self.bits_samplenums_tdi[-1][1] = self.samplenum
+                    self.bits_samplenums_tdo[-1][1] = self.samplenum
                     
-                self.bits_tdi.insert(0, tdi)
-                self.bits_tdo.insert(0, tdo)
+                self.bits_tdi.append(tdi)
+                self.bits_tdo.append(tdo)
                   
             # Use self.samplenum as SS of the current bit.
-            self.bits_samplenums_tdi.insert(0, [self.samplenum, -1])
-            self.bits_samplenums_tdo.insert(0, [self.samplenum, -1])
+            self.bits_samplenums_tdi.append([self.samplenum, -1])
+            self.bits_samplenums_tdo.append([self.samplenum, -1])
                     
             self.bits_cnt = self.bits_cnt + 1
 
@@ -223,25 +223,25 @@ class Decoder(srd.Decoder):
             if self.bits_cnt > 0:
                 if self.bits_cnt == 1:  # Only shift one bit
                     self.ss_bitstring = self.samplenum
-                    self.bits_tdi.insert(0, tdi)
-                    self.bits_tdo.insert(0, tdo)
+                    self.bits_tdi.append(tdi)
+                    self.bits_tdo.append(tdo)
                     ## Use self.samplenum as SS of the current bit.
-                    self.bits_samplenums_tdi.insert(0, [self.samplenum, -1])
-                    self.bits_samplenums_tdo.insert(0, [self.samplenum, -1])
+                    self.bits_samplenums_tdi.append([self.samplenum, -1])
+                    self.bits_samplenums_tdo.append([self.samplenum, -1])
                 else:
                     ### ----------------------------------------------------------------
-                    self.putx([16, [str(self.bits_tdi[0])]])
-                    self.putx([17, [str(self.bits_tdo[0])]])
+                    self.putx([16, [str(self.bits_tdi[-1])]])
+                    self.putx([17, [str(self.bits_tdo[-1])]])
                     ### Use self.samplenum as ES of the previous bit.
-                    self.bits_samplenums_tdi[0][1] = self.samplenum
-                    self.bits_samplenums_tdo[0][1] = self.samplenum	
+                    self.bits_samplenums_tdi[-1][1] = self.samplenum
+                    self.bits_samplenums_tdo[-1][1] = self.samplenum
                     
-                    self.bits_tdi.insert(0, tdi)
-                    self.bits_tdo.insert(0, tdo)
+                    self.bits_tdi.append(tdi)
+                    self.bits_tdo.append(tdo)
                     
                     ## Use self.samplenum as SS of the current bit.
-                    self.bits_samplenums_tdi.insert(0, [self.samplenum, -1])
-                    self.bits_samplenums_tdo.insert(0, [self.samplenum, -1])
+                    self.bits_samplenums_tdi.append([self.samplenum, -1])
+                    self.bits_samplenums_tdo.append([self.samplenum, -1])
                     ## ----------------------------------------------------------------
                 
                 self.data_ready = True
@@ -253,7 +253,10 @@ class Decoder(srd.Decoder):
             if self.data_ready:
                 self.data_ready = False
                 self.es_bitstring = self.samplenum
+
                 t = self.state[-2:] + ' TDI'
+                self.bits_tdi.reverse()
+                self.bits_samplenums_tdi.reverse()
                 b = ''.join(map(str, self.bits_tdi))
                 h = ' (0x%X' % int('0b' + b, 2) + ')'
                 s = t + ': ' + h + ', ' + str(len(self.bits_tdi)) + ' bits' #b +
@@ -265,6 +268,8 @@ class Decoder(srd.Decoder):
                 self.bits_samplenums_tdi = []
 
                 t = self.state[-2:] + ' TDO'
+                self.bits_tdo.reverse()
+                self.bits_samplenums_tdo.reverse()
                 b = ''.join(map(str, self.bits_tdo))
                 h = ' (0x%X' % int('0b' + b, 2) + ')'
                 s = t + ': ' + h + ', ' + str(len(self.bits_tdo)) + ' bits' #+ b 
