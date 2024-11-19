@@ -1,0 +1,47 @@
+name: CMake
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Container
+      run: sudo apt-get update && sudo apt-get install -y git-core build-essential cmake autoconf automake libtool pkg-config libglib2.0-dev libzip-dev libudev-dev libusb-1.0-0-dev python3-dev qt5-default libboost-dev libboost-test-dev libboost-thread-dev libboost-system-dev libboost-filesystem-dev check libfftw3-dev wget
+    - name: make staging area
+      run: mkdir -p ${{github.workspace}}/staging/AppDir
+    - name: build libsigrok4DSL
+      run: cd libsigrok4DSL && ./autogen.sh && ./configure && make && make install DESTDIR=${{github.workspace}}/staging/AppDir && cd ..
+      
+    - name: build libsigrokdecode4DSL
+      run: cd libsigrokdecode4DSL && ./autogen.sh && ./configure && make && make install DESTDIR=${{github.workspace}}/staging/AppDir && cd ..
+
+    - name: fix AppImage pkgconfig files 
+      run: find ${{github.workspace}}/staging/AppDir/usr/local/lib/pkgconfig/*pc|xargs sed -i "s#/usr/local#${{github.workspace}}/staging/AppDir/usr/local#g"    
+
+    - name: build DSView
+      run: cd DSView && PKG_CONFIG_PATH="${{github.workspace}}/staging/AppDir/usr/local/lib/pkgconfig" cmake . -DCMAKE_INSTALL_PREFIX=/usr&& make && make install DESTDIR="${{github.workspace}}/staging/AppDir"
+      
+    - name: get AppImage util
+      run: cd ${{github.workspace}}/staging && wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && chmod +x linuxdeploy-x86_64.AppImage
+    - name: create AppImage
+      run: cd ${{github.workspace}}/staging &&  LD_LIBRARY_PATH="${{github.workspace}}/staging/AppDir/usr/local/lib" ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage || ls -l
+    - name: Upload Artifact GitHub Action
+      uses: actions/upload-artifact@v2
+      with: 
+        name: DSView.AppImage
+        path: ${{github.workspace}}/staging/*.AppImage
