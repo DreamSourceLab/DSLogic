@@ -135,6 +135,7 @@ void LogicSignal::paint_mid_align(QPainter &p, int left, int right, QColor fore,
 
     const int64_t last_sample = end_align_sample;
 	const double samples_per_pixel = samplerate * scale;
+    const double pixels_per_sample = 1.0 / samples_per_pixel;
 
     uint16_t width = right - left;
     const double start = offset * samples_per_pixel;
@@ -158,6 +159,10 @@ void LogicSignal::paint_mid_align(QPainter &p, int left, int right, QColor fore,
     int preY = first_sample ? high_offset : low_offset;
     int x = preX;
     std::vector<QLine> wave_lines;
+    std::vector<QPoint> samples;
+
+    double firstVisiblePixelX = _view->index2pixel(start_index);
+    samples.push_back(QPoint(firstVisiblePixelX, preY));
     
     if (_cur_edges.size() < max_togs) {
         std::vector<std::pair<uint16_t, bool>>::const_iterator i;
@@ -167,6 +172,7 @@ void LogicSignal::paint_mid_align(QPainter &p, int left, int right, QColor fore,
             wave_lines.push_back(QLine(x, high_offset, x, low_offset));
             preX = x;
             preY = (*i).second ? high_offset : low_offset;
+            samples.push_back(QPoint(x, (*i).second ? high_offset : low_offset));
         }
         x = (*i).first;
         wave_lines.push_back(QLine(preX, preY, x, preY));
@@ -179,6 +185,7 @@ void LogicSignal::paint_mid_align(QPainter &p, int left, int right, QColor fore,
                 wave_lines.push_back(QLine(x, high_offset, x, low_offset));
                 preX = x;
                 preY = (*i).second ? high_offset : low_offset;
+                samples.push_back(QPoint(x, (*i).second ? high_offset : low_offset));
             }
             x++;
             i++;
@@ -186,8 +193,39 @@ void LogicSignal::paint_mid_align(QPainter &p, int left, int right, QColor fore,
         wave_lines.push_back(QLine(preX, preY, x, preY));
     }
 
+    double lastVisiblePixelX = _view->index2pixel(end_index);
+    samples.push_back(QPoint(lastVisiblePixelX, preY));
+
     p.setPen(_colour.isValid() ? _colour : fore);
     p.drawLines(wave_lines.data(), wave_lines.size());
+
+    p.setBrush(_colour.isValid() ? _colour : fore);
+    if (pixels_per_sample > 10) {
+        QPoint last_sample(0, 0);
+        bool first_sample = true;
+        for (const QPoint &sample : samples) {
+            // draw samples without edges
+            if (!first_sample) {
+                int diff_x = sample.x() - last_sample.x();
+
+                for (int i = 1; i < round(diff_x / pixels_per_sample); i++) {
+                    paint_sample(p, last_sample.x() + i * pixels_per_sample, last_sample.y());
+                }
+            } else {
+                first_sample = false;
+            }
+
+            // draw next sample
+            paint_sample(p, sample.x(), sample.y());
+
+            last_sample = sample;
+        }
+    }
+}
+
+void LogicSignal::paint_sample(QPainter &p, double x, double y)
+{
+    p.drawRect(x - 1, y - 1, 2, 2);
 }
 
 void LogicSignal::paint_caps(QPainter &p, QLineF *const lines,

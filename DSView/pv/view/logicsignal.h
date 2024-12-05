@@ -122,6 +122,8 @@ private:
 
     void paint_mid_align(QPainter &p, int left, int right, QColor fore, QColor back, uint64_t end_align_sample);
 
+    void paint_sample(QPainter &p, double x, double y);
+
 private:
 	pv::data::LogicSnapshot* _data;
     std::vector< std::pair<uint16_t, bool> > _cur_edges;
