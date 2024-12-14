@@ -28,6 +28,18 @@ Building and installing
 Step1: Installing the requirements:
 please check your respective distro's package manager tool if you use other distros
 
+Arch/Manjaro:
+  You can install dsview from the AUR repository or https://github.com/taotieren/aur-repo.
+  Installing the dsview Release:
+ $ yay -Syu dsview
+
+  Installing dsview Development Edition:
+ $ yay -Syu dsview-git
+
+  Compiling from local repositories:
+ $ sudo pacman -S base-devel git cmake glib2 zlib libusb
+   python boost qt5 fftw
+
 Debian/Ubuntu:
  $ sudo apt install git gcc g++ make cmake qt5-default libglib2.0-dev zlib1g-dev \
  	libusb-1.0-0-dev libboost-dev libfftw3-dev python3-dev libudev-dev pkg-config
@@ -40,10 +52,6 @@ Fedora (18, 19):
  $ sudo yum install git gcc g++ make cmake libtool pkgconfig glib2-devel \
    zlib-devel libudev-devel libusb1-devel \
    python3-devel qt-devel boost-devel libfftw3-devel
-
-Arch:
- $ pacman -S base-devel git cmake glib2 zlib libusb
-   python boost qt5 fftw
    
 Mac:
   install git
