@@ -18,31 +18,30 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
  */
 
- 
+#include "../config.h" /* Needed for PACKAGE_STRING and others. */
 #include "../libsigrok-internal.h"
+#include "../log.h"
+#include <float.h>
+#include <glib.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <glib.h>
-#include "../config.h" /* Needed for PACKAGE_STRING and others. */
-#include "../log.h"
-#include <stdio.h>
-#include <float.h>
 
 #undef LOG_PREFIX
 #define LOG_PREFIX "csv: "
-  
+
 struct context {
-	unsigned int num_enabled_channels;
-	uint64_t samplerate;
+    unsigned int num_enabled_channels;
+    uint64_t samplerate;
     uint64_t limit_samples;
-	char separator;
-	gboolean header_done;
-	int *channel_index;
-    int *channel_unit;
-    float *channel_scale;
-    uint16_t *channel_offset;
-    double *channel_mmin;
-    double *channel_mmax;
+    char separator;
+    gboolean header_done;
+    int* channel_index;
+    int* channel_unit;
+    float* channel_scale;
+    uint16_t* channel_offset;
+    double* channel_mmin;
+    double* channel_mmax;
     uint32_t ref_min;
     uint32_t ref_max;
     uint64_t mask;
@@ -63,115 +62,114 @@ struct context {
  *  - Trigger support.
  */
 
-static int init(struct sr_output *o, GHashTable *options)
+static int init(struct sr_output* o, GHashTable* options)
 {
-	struct context *ctx = NULL;
-	struct sr_channel *ch;
-	GSList *l;
-	int i;
+    struct context* ctx = NULL;
+    struct sr_channel* ch;
+    GSList* l;
+    int i;
     float range;
     int ch_num;
 
-	if (!o || !o->sdi)
-		return SR_ERR_ARG;
+    if (!o || !o->sdi)
+        return SR_ERR_ARG;
 
-	ctx = g_try_malloc0(sizeof(struct context));
-    if (ctx == NULL){
+    ctx = g_try_malloc0(sizeof(struct context));
+    if (ctx == NULL) {
         sr_err("%s,ERROR:failed to alloc memory.", __func__);
         return SR_ERR;
     }
     memset(ctx, 0, sizeof(struct context));
 
-	o->priv = ctx;
-	ctx->separator = ',';
+    o->priv = ctx;
+    ctx->separator = ',';
     ctx->mask = 0;
     ctx->index = 0;
     ctx->type = g_variant_get_int16(g_hash_table_lookup(options, "type"));
     ch_num = 0;
 
-    if (o->start_sample_index > 0){
+    if (o->start_sample_index > 0) {
         ctx->index = o->start_sample_index;
     }
 
-	/* Get the number of channels, and the unitsize. */
-	for (l = o->sdi->channels; l; l = l->next) {
-		ch = l->data;
+    /* Get the number of channels, and the unitsize. */
+    for (l = o->sdi->channels; l; l = l->next) {
+        ch = l->data;
         if (ch->type != ctx->type)
-			continue;
-		if (!ch->enabled)
-			continue;
-		ctx->num_enabled_channels++;
-	}
+            continue;
+        if (!ch->enabled)
+            continue;
+        ctx->num_enabled_channels++;
+    }
 
-	ctx->channel_index = g_try_malloc0(sizeof(int) * ctx->num_enabled_channels);
+    ctx->channel_index = g_try_malloc0(sizeof(int) * ctx->num_enabled_channels);
     ctx->channel_unit = g_try_malloc0(sizeof(int) * ctx->num_enabled_channels);
     ctx->channel_scale = g_try_malloc0(sizeof(float) * ctx->num_enabled_channels);
     ctx->channel_offset = g_try_malloc0(sizeof(uint16_t) * ctx->num_enabled_channels);
     ctx->channel_mmax = g_try_malloc0(sizeof(double) * ctx->num_enabled_channels);
     ctx->channel_mmin = g_try_malloc0(sizeof(double) * ctx->num_enabled_channels);
 
-    if (ctx->channel_index == NULL || ctx->channel_mmin == NULL){
+    if (ctx->channel_index == NULL || ctx->channel_mmin == NULL) {
         sr_err("%s,ERROR:failed to alloc memory.", __func__);
         return SR_ERR;
     }
 
-	/* Once more to map the enabled channels. */
+    /* Once more to map the enabled channels. */
     i = 0;
 
-	for (l = o->sdi->channels; l; l = l->next) {
-		ch = l->data;
+    for (l = o->sdi->channels; l; l = l->next) {
+        ch = l->data;
         if (ch->type != ctx->type)
-			continue;
-		if (!ch->enabled)
-			continue;
+            continue;
+        if (!ch->enabled)
+            continue;
         ctx->channel_index[i] = ch->index;
-        //ctx->mask |= (1 << ch->index);
+        // ctx->mask |= (1 << ch->index);
         ctx->mask |= (1 << i);
         range = ch->vdiv * ch->vfactor * DS_CONF_DSO_VDIVS;
-        ctx->channel_unit[i] = (range >= 5000000) ? 1000000 :
-                                (range >= 5000) ? 1000 : 1;
-       // sr_info("unit %d:%d", i, ctx->channel_unit[i]);
+        ctx->channel_unit[i] = (range >= 5000000) ? 1000000 : (range >= 5000) ? 1000
+                                                                              : 1;
+        // sr_info("unit %d:%d", i, ctx->channel_unit[i]);
         ctx->channel_scale[i] = range / ctx->channel_unit[i];
         ctx->channel_offset[i] = ch->hw_offset;
         ctx->channel_mmax[i] = ch->map_max;
         ctx->channel_mmin[i] = ch->map_min;
         i++;
-	}
+    }
 
-	return SR_OK;
+    return SR_OK;
 }
 
-static GString *gen_header(const struct sr_output *o)
+static GString* gen_header(const struct sr_output* o)
 {
-	struct context *ctx;
-	struct sr_channel *ch;
-	GString *header;
-	GSList *l;
-	time_t t;
-	int num_channels, i;
+    struct context* ctx;
+    struct sr_channel* ch;
+    GString* header;
+    GSList* l;
+    time_t t;
+    int num_channels, i;
 
-	ctx = o->priv;
-	header = g_string_sized_new(512);
+    ctx = o->priv;
+    header = g_string_sized_new(512);
 
-	/* Some metadata */
-	t = time(NULL);
-	g_string_append_printf(header, "; CSV, generated by DSView, sampled on %s\n",
-			o->time_string); //ctime(&t)
+    /* Some metadata */
+    t = time(NULL);
+    g_string_append_printf(header, "; CSV, generated by DSView, sampled on %s\n",
+        o->time_string); // ctime(&t)
 
-	/* Columns / channels */
+    /* Columns / channels */
     if (ctx->type == SR_CHANNEL_LOGIC)
         num_channels = g_slist_length(o->sdi->channels);
     else
         num_channels = ctx->num_enabled_channels;
     g_string_append_printf(header, "; Channels (%d/%d)\n",
-			ctx->num_enabled_channels, num_channels);
+        ctx->num_enabled_channels, num_channels);
 
-
-    char *samplerate_s = sr_samplerate_string(ctx->samplerate);
+    char* samplerate_s = sr_samplerate_string(ctx->samplerate);
     g_string_append_printf(header, "; Sample rate: %s\n", samplerate_s);
     g_free(samplerate_s);
 
-    char *depth_s = sr_samplecount_string(ctx->limit_samples);
+    char* depth_s = sr_samplecount_string(ctx->limit_samples);
     g_string_append_printf(header, "; Sample count: %s\n", depth_s);
     g_free(depth_s);
 
@@ -179,7 +177,7 @@ static GString *gen_header(const struct sr_output *o)
         g_string_append_printf(header, "Time(s),");
 
     i = 0;
-        
+
     for (l = o->sdi->channels; l; l = l->next) {
         ch = l->data;
 
@@ -189,15 +187,13 @@ static GString *gen_header(const struct sr_output *o)
             continue;
 
         if (ctx->type == SR_CHANNEL_DSO) {
-            char *unit_s = ctx->channel_unit[i] >= 1000000 ? "kV" :
-                           ctx->channel_unit[i] >= 1000 ?  "V" : "mV";
-            //sr_info("head %d:%s", i, unit_s);
+            char* unit_s = ctx->channel_unit[i] >= 1000000 ? "kV" : ctx->channel_unit[i] >= 1000 ? "V"
+                                                                                                 : "mV";
+            // sr_info("head %d:%s", i, unit_s);
             g_string_append_printf(header, " %s (Unit: %s),", ch->name, unit_s);
-        }
-        else if (ctx->type == SR_CHANNEL_ANALOG) {
+        } else if (ctx->type == SR_CHANNEL_ANALOG) {
             g_string_append_printf(header, " %s (Unit: %s),", ch->name, ch->map_unit);
-        }
-        else {
+        } else {
             g_string_append_printf(header, " %s,", ch->name);
         }
 
@@ -209,51 +205,50 @@ static GString *gen_header(const struct sr_output *o)
         g_string_truncate(header, header->len - 1);
     g_string_append_printf(header, "\n");
 
-	return header;
+    return header;
 }
 
-static int receive(const struct sr_output *o, const struct sr_datafeed_packet *packet,
-		GString **out)
+static int receive(const struct sr_output* o, const struct sr_datafeed_packet* packet,
+    GString** out)
 {
-	const struct sr_datafeed_meta *meta;
-	const struct sr_datafeed_logic *logic;
-    const struct sr_datafeed_dso *dso;
-    const struct sr_datafeed_analog *analog;
-	const struct sr_config *src;
-    GSList *l;
-	struct context *ctx;
-	int idx;
-	uint64_t i, j;
+    const struct sr_datafeed_meta* meta;
+    const struct sr_datafeed_logic* logic;
+    const struct sr_datafeed_dso* dso;
+    const struct sr_datafeed_analog* analog;
+    const struct sr_config* src;
+    GSList* l;
+    struct context* ctx;
+    int idx;
+    uint64_t i, j;
     unsigned char *p, c;
     double tmpv;
-    struct sr_channel *ch;
+    struct sr_channel* ch;
 
     int bDotLetter = 0;
     char tmp_buffer[50];
-    char *pFlagCheck = tmp_buffer;
+    char* pFlagCheck = tmp_buffer;
 
     sprintf(tmp_buffer, "%0.15g", DBL_MAX);
-    
-    while (*pFlagCheck)
-    {
-        if (*pFlagCheck == '.'){
+
+    while (*pFlagCheck) {
+        if (*pFlagCheck == '.') {
             bDotLetter = 1;
             break;
         }
         pFlagCheck++;
     }
 
-	*out = NULL;
-	if (!o || !o->sdi)
-		return SR_ERR_ARG;
-	if (!(ctx = o->priv))
-		return SR_ERR_ARG;
+    *out = NULL;
+    if (!o || !o->sdi)
+        return SR_ERR_ARG;
+    if (!(ctx = o->priv))
+        return SR_ERR_ARG;
 
-	switch (packet->type) {
-	case SR_DF_META:
-		meta = packet->payload;
-		for (l = meta->config; l; l = l->next) {
-			src = l->data;
+    switch (packet->type) {
+    case SR_DF_META:
+        meta = packet->payload;
+        for (l = meta->config; l; l = l->next) {
+            src = l->data;
             if (src->key == SR_CONF_SAMPLERATE)
                 ctx->samplerate = g_variant_get_uint64(src->data);
             else if (src->key == SR_CONF_LIMIT_SAMPLES)
@@ -263,35 +258,34 @@ static int receive(const struct sr_output *o, const struct sr_datafeed_packet *p
             else if (src->key == SR_CONF_REF_MAX)
                 ctx->ref_max = g_variant_get_uint32(src->data);
         }
-		break;
-	case SR_DF_LOGIC:
-		logic = packet->payload;
-		if (!ctx->header_done) {
-			*out = gen_header(o);
-			ctx->header_done = TRUE;
-		} else {
-			*out = g_string_sized_new(512);
-		}
+        break;
+    case SR_DF_LOGIC:
+        logic = packet->payload;
+        if (!ctx->header_done) {
+            *out = gen_header(o);
+            ctx->header_done = TRUE;
+        } else {
+            *out = g_string_sized_new(512);
+        }
 
-		for (i = 0; i <= logic->length - logic->unitsize; i += logic->unitsize) {
+        for (i = 0; i <= logic->length - logic->unitsize; i += logic->unitsize) {
             ctx->index++;
 
-            if (packet->bExportOriginalData == 0){
-                if (ctx->index > 1 && (*(uint64_t *)(logic->data + i) & ctx->mask) == ctx->pre_data)
-                   continue;
-            } 
-            
-            tmpv = (double)(ctx->index-1) / (double)ctx->samplerate;
-
-            if (bDotLetter){
-                g_string_append_printf(*out, "%0.15g", tmpv); 
+            if (packet->bExportOriginalData == 0) {
+                if (ctx->index > 1 && (*(uint64_t*)(logic->data + i) & ctx->mask) == ctx->pre_data)
+                    continue;
             }
-            else{
+
+            tmpv = (double)(ctx->index - 1) / (double)ctx->samplerate;
+
+            if (bDotLetter) {
+                g_string_append_printf(*out, "%0.15g", tmpv);
+            } else {
                 sprintf(tmp_buffer, "%0.15g", tmpv);
                 pFlagCheck = tmp_buffer;
 
-                while (*pFlagCheck){
-                    if (*pFlagCheck == ','){
+                while (*pFlagCheck) {
+                    if (*pFlagCheck == ',') {
                         *pFlagCheck = '.';
                         break;
                     }
@@ -303,16 +297,16 @@ static int receive(const struct sr_output *o, const struct sr_datafeed_packet *p
 
             for (j = 0; j < ctx->num_enabled_channels; j++) {
                 idx = j;
-				p = logic->data + i + idx / 8;
-				c = *p & (1 << (idx % 8));
+                p = logic->data + i + idx / 8;
+                c = *p & (1 << (idx % 8));
                 g_string_append_c(*out, ctx->separator);
                 g_string_append_c(*out, c ? '1' : '0');
-			}
-			g_string_append_printf(*out, "\n");
-            ctx->pre_data = (*(uint64_t *)(logic->data + i) & ctx->mask);
-		}
-		break;
-     case SR_DF_DSO:
+            }
+            g_string_append_printf(*out, "\n");
+            ctx->pre_data = (*(uint64_t*)(logic->data + i) & ctx->mask);
+        }
+        break;
+    case SR_DF_DSO:
         dso = packet->payload;
         if (!ctx->header_done) {
             *out = gen_header(o);
@@ -325,9 +319,7 @@ static int receive(const struct sr_output *o, const struct sr_datafeed_packet *p
             for (j = 0; j < ctx->num_enabled_channels; j++) {
                 idx = ctx->channel_index[j];
                 p = dso->data + i * ctx->num_enabled_channels + idx * ((ctx->num_enabled_channels > 1) ? 1 : 0);
-                g_string_append_printf(*out, "%0.5f", (ctx->channel_offset[j] - *p) *
-                                                       ctx->channel_scale[j] /
-                                                      (ctx->ref_max - ctx->ref_min));
+                g_string_append_printf(*out, "%0.5f", (ctx->channel_offset[j] - *p) * ctx->channel_scale[j] / (ctx->ref_max - ctx->ref_min));
                 g_string_append_c(*out, ctx->separator);
             }
 
@@ -337,89 +329,88 @@ static int receive(const struct sr_output *o, const struct sr_datafeed_packet *p
         }
         break;
     case SR_DF_ANALOG:
-       analog = packet->payload;
-       if (!ctx->header_done) {
-           *out = gen_header(o);
-           ctx->header_done = TRUE;
-       } else {
-           *out = g_string_sized_new(512);
-       }
+        analog = packet->payload;
+        if (!ctx->header_done) {
+            *out = gen_header(o);
+            ctx->header_done = TRUE;
+        } else {
+            *out = g_string_sized_new(512);
+        }
 
-       int enalbe_channel_flags[8];
-       int ch_num = 0;
+        int enalbe_channel_flags[8];
+        int ch_num = 0;
 
-       for (l = o->sdi->channels; l; l = l->next){
+        for (l = o->sdi->channels; l; l = l->next) {
             ch = l->data;
             enalbe_channel_flags[ch_num++] = ch->enabled;
-       }
+        }
 
-       double max_min_ref = (double)(ctx->ref_max - ctx->ref_min);
-       double vf = 0;
-       int ch_cfg_dex = 0;
-       double hw_offset = 0;
-       double mapRange = 0;
-       double mmax = 0;
-       double mmin = 0;
-       void *ptr;
+        double max_min_ref = (double)(ctx->ref_max - ctx->ref_min);
+        double vf = 0;
+        int ch_cfg_dex = 0;
+        double hw_offset = 0;
+        double mapRange = 0;
+        double mmax = 0;
+        double mmin = 0;
+        void* ptr;
 
-       for (i = 0; i < (uint64_t)analog->num_samples; i++) {
+        for (i = 0; i < (uint64_t)analog->num_samples; i++) {
             ch_cfg_dex = 0;
 
-           for (j = 0; j < ch_num; j++) {
+            for (j = 0; j < ch_num; j++) {
 
-               if (enalbe_channel_flags[j] == 0){
+                if (enalbe_channel_flags[j] == 0) {
                     continue;
-               }
+                }
 
-               ptr = (unsigned char*)analog->data + i * ch_num + j;
-               p = (unsigned char*)ptr;
-               hw_offset = (double)ctx->channel_offset[ch_cfg_dex];
-               mmax = ctx->channel_mmax[ch_cfg_dex];
-               mmin = ctx->channel_mmin[ch_cfg_dex];
-               mapRange = (mmax - mmin);
-               vf = (hw_offset - (double)(*p)) * mapRange / max_min_ref;
+                ptr = (unsigned char*)analog->data + i * ch_num + j;
+                p = (unsigned char*)ptr;
+                hw_offset = (double)ctx->channel_offset[ch_cfg_dex];
+                mmax = ctx->channel_mmax[ch_cfg_dex];
+                mmin = ctx->channel_mmin[ch_cfg_dex];
+                mapRange = (mmax - mmin);
+                vf = (hw_offset - (double)(*p)) * mapRange / max_min_ref;
 
-               g_string_append_printf(*out, "%0.5f",  vf);
-               g_string_append_c(*out, ctx->separator);
+                g_string_append_printf(*out, "%0.5f", vf);
+                g_string_append_c(*out, ctx->separator);
 
-               ch_cfg_dex++;
-           }
+                ch_cfg_dex++;
+            }
 
-           /* Drop last separator. */
-           g_string_truncate(*out, (*out)->len - 1);
-           g_string_append_printf(*out, "\n");
-       }
-       break;
-	}
+            /* Drop last separator. */
+            g_string_truncate(*out, (*out)->len - 1);
+            g_string_append_printf(*out, "\n");
+        }
+        break;
+    }
 
-	return SR_OK;
+    return SR_OK;
 }
 
-static int cleanup(struct sr_output *o)
+static int cleanup(struct sr_output* o)
 {
-	struct context *ctx;
+    struct context* ctx;
 
-	if (!o || !o->sdi)
-		return SR_ERR_ARG;
+    if (!o || !o->sdi)
+        return SR_ERR_ARG;
 
-	if (o->priv) {
-		ctx = o->priv;
-		g_free(ctx->channel_index);
-		g_free(o->priv);
-		o->priv = NULL;
-	}
+    if (o->priv) {
+        ctx = o->priv;
+        g_free(ctx->channel_index);
+        g_free(o->priv);
+        o->priv = NULL;
+    }
 
-	return SR_OK;
+    return SR_OK;
 }
 
 SR_PRIV struct sr_output_module output_csv = {
-	.id = "csv",
-	.name = "CSV",
-	.desc = "Comma-separated values",
-	.exts = (const char*[]){"csv", NULL},
-	.options = NULL,
-	.init = init,
-	.receive = receive,
-	.cleanup = cleanup,
+    .id = "csv",
+    .name = "CSV",
+    .desc = "Comma-separated values",
+    .exts = (const char*[]) { "csv", NULL },
+    .options = NULL,
+    .init = init,
+    .receive = receive,
+    .cleanup = cleanup,
 };
- 
