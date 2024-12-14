@@ -292,7 +292,7 @@ static int receive(const struct sr_output* o, const struct sr_datafeed_packet* p
                     pFlagCheck++;
                 }
 
-                g_string_append_printf(*out, tmp_buffer);
+                g_string_append(*out, tmp_buffer);
             }
 
             for (j = 0; j < ctx->num_enabled_channels; j++) {
@@ -357,7 +357,7 @@ static int receive(const struct sr_output* o, const struct sr_datafeed_packet* p
         for (i = 0; i < (uint64_t)analog->num_samples; i++) {
             ch_cfg_dex = 0;
 
-            for (j = 0; j < ch_num; j++) {
+            for (j = 0; j < (uint64_t)ch_num; j++) {
 
                 if (enalbe_channel_flags[j] == 0) {
                     continue;
