@@ -1,7 +1,7 @@
 [
     {
         "id": "dec_flexray_chan_channel",
-        "text": "FlexRay通道"
+        "text": "FlexRay 通道"
     },
     {
         "id": "dec_flexray_opt_channel_type",
@@ -9,11 +9,11 @@
     },
     {
         "id": "dec_flexray_opt_bitrate",
-        "text": "波特率(bit/s)"
+        "text": "波特率 (bit/s)"
     },
     {
         "id": "dec_fsi_chan_data",
-        "text": "数据(帧)"
+        "text": "数据 (帧)"
     },
     {
         "id": "dec_fsi_chan_clock",
@@ -21,35 +21,35 @@
     },
     {
         "id": "dec_gpib_chan_dio1",
-        "text": "数据位1"
+        "text": "数据位 1"
     },
     {
         "id": "dec_gpib_chan_dio2",
-        "text": "数据位2"
+        "text": "数据位 2"
     },
     {
         "id": "dec_gpib_chan_dio3",
-        "text": "数据位3"
+        "text": "数据位 3"
     },
     {
         "id": "dec_gpib_chan_dio4",
-        "text": "数据位4"
+        "text": "数据位 4"
     },
     {
         "id": "dec_gpib_chan_dio5",
-        "text": "数据位5"
+        "text": "数据位 5"
     },
     {
         "id": "dec_gpib_chan_dio6",
-        "text": "数据位6"
+        "text": "数据位 6"
     },
     {
         "id": "dec_gpib_chan_dio7",
-        "text": "数据位7"
+        "text": "数据位 7"
     },
     {
         "id": "dec_gpib_chan_dio8",
-        "text": "数据位8"
+        "text": "数据位 8"
     },
     {
         "id": "dec_gpib_chan_eoi",
@@ -97,7 +97,7 @@
     },
     {
         "id": "dec_i2cfilter_opt_address",
-        "text": "从I²C流中筛选出地址"
+        "text": "从 I²C 流中筛选出地址"
     },
     {
         "id": "dec_i2cfilter_opt_direction",
@@ -117,11 +117,11 @@
     },
     {
         "id": "dec_i2s_opt_ws_polarity",
-        "text": "WS极性"
+        "text": "WS 极性"
     },
     {
         "id": "dec_i2s_opt_clk_edge",
-        "text": "SCK有效边沿"
+        "text": "SCK 有效边沿"
     },
     {
         "id": "dec_i2s_opt_bit_shift",
@@ -141,7 +141,7 @@
     },
     {
         "id": "dec_iec_chan_data",
-        "text": "数据I/O"
+        "text": "数据 I/O"
     },
     {
         "id": "dec_iec_chan_clk",
@@ -157,35 +157,35 @@
     },
     {
         "id": "dec_ieee488_chan_dio1",
-        "text": "数据位1/串行数据"
+        "text": "数据位 1/串行数据"
     },
     {
         "id": "dec_ieee488_opt_chan_dio2",
-        "text": "数据位2"
+        "text": "数据位 2"
     },
     {
         "id": "dec_ieee488_opt_chan_dio3",
-        "text": "数据位3"
+        "text": "数据位 3"
     },
     {
         "id": "dec_ieee488_opt_chan_dio4",
-        "text": "数据位4"
+        "text": "数据位 4"
     },
     {
         "id": "dec_ieee488_opt_chan_dio5",
-        "text": "数据位5"
+        "text": "数据位 5"
     },
     {
         "id": "dec_ieee488_opt_chan_dio6",
-        "text": "数据位6"
+        "text": "数据位 6"
     },
     {
         "id": "dec_ieee488_opt_chan_dio7",
-        "text": "数据位7"
+        "text": "数据位 7"
     },
     {
         "id": "dec_ieee488_opt_chan_dio8",
-        "text": "数据位8"
+        "text": "数据位 8"
     },
     {
         "id": "dec_ieee488_opt_chan_eoi",
@@ -225,7 +225,7 @@
     },
     {
         "id": "dec_ieee488_opt_iec_periph",
-        "text": "解码Commodore IEC总线外围设备详细信息"
+        "text": "解码 Commodore IEC 总线外围设备详细信息"
     },
     {
         "id": "dec_ieee488_opt_delim",
@@ -265,7 +265,7 @@
     },
     {
         "id": "dec_ir_rc6_chan_ir",
-        "text": "IR数据线"
+        "text": "IR 数据线"
     },
     {
         "id": "dec_ir_rc6_opt_polarity",
@@ -273,7 +273,7 @@
     },
     {
         "id": "dec_ir_sirc_chan_ir",
-        "text": "IR数据线"
+        "text": "IR 数据线"
     },
     {
         "id": "dec_ir_sirc_opt_polarity",

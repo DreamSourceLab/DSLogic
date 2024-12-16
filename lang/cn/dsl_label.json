@@ -33,7 +33,7 @@
     },
     {
         "id": "Run Length Encoding",
-        "text": "RLE编码"
+        "text": "RLE 编码"
     },
     {
         "id": "Wait Buffer Upload",
@@ -109,7 +109,7 @@
     },
     {
         "id": "Enable RLE Compress",
-        "text": "RLE硬件压缩"
+        "text": "RLE 硬件压缩"
     },
     {
         "id": "Bandwidth Limit",

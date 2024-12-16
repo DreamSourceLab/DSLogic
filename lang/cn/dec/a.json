@@ -21,7 +21,7 @@
     },
     {
         "id": "dec_ad79x0_opt_vref",
-        "text": "参考电压(V)"
+        "text": "参考电压 (V)"
     },
     {
         "id": "dec_am230x_chan_sda",
@@ -49,7 +49,7 @@
     },
     {
         "id": "dec_arm_etmv3_opt_elffile",
-        "text": "elf路径"
+        "text": "elf 路径"
     },
     {
         "id": "dec_arm_etmv3_opt_branch_enc",
@@ -65,7 +65,7 @@
     },
     {
         "id": "dec_arm_itm_opt_elffile",
-        "text": "elf路径"
+        "text": "elf 路径"
     },
     {
         "id": "dec_arm_tpiu_opt_stream",
@@ -77,35 +77,35 @@
     },
     {
         "id": "dec_aud_chan_audck",
-        "text": "AUD时钟"
+        "text": "AUD 时钟"
     },
     {
         "id": "dec_aud_chan_naudsync",
-        "text": "AUD同步"
+        "text": "AUD 同步"
     },
     {
         "id": "dec_aud_chan_audata3",
-        "text": "AUD数据线3"
+        "text": "AUD 数据线 3"
     },
     {
         "id": "dec_aud_chan_audata2",
-        "text": "AUD数据线2"
+        "text": "AUD 数据线 2"
     },
     {
         "id": "dec_aud_chan_audata1",
-        "text": "AUD数据线1"
+        "text": "AUD 数据线 1"
     },
     {
         "id": "dec_aud_chan_audata0",
-        "text": "AUD数据线0"
+        "text": "AUD 数据线 0"
     },
     {
         "id": "dec_avr_pdi_chan_reset",
-        "text": "复位/PDI时钟"
+        "text": "复位/PDI 时钟"
     },
     {
         "id": "dec_avr_pdi_chan_data",
-        "text": "PDI数据"
+        "text": "PDI 数据"
     },
     {
         "id": "dec_c2_chan_c2ck",
@@ -125,7 +125,7 @@
     },
     {
         "id": "dec_caliper_opt_timeout_ms",
-        "text": "数据包超时(毫秒),0表示禁用 "
+        "text": "数据包超时 (毫秒),0 表示禁用 "
     },
     {
         "id": "dec_caliper_opt_unit",
@@ -137,7 +137,7 @@
     },
     {
         "id": "dec_can_chan_can_rx",
-        "text": "CAN信号"
+        "text": "CAN 信号"
     },
     {
         "id": "dec_can_opt_bitrate",
@@ -153,15 +153,15 @@
     },
     {
         "id": "dec_can_opt_sample_point",
-        "text": "采样点(%d)"
+        "text": "采样点 (%d)"
     },
     {
         "id": "dec_cec_chan_cec",
-        "text": "CEC信号"
+        "text": "CEC 信号"
     },
     {
         "id": "dec_1uart_chan_rxtx",
-        "text": "UART信号线"
+        "text": "UART 信号线"
     },
     {
         "id": "dec_cjtag_oscan0_chan_tdi",
@@ -201,15 +201,15 @@
     },
     {
         "id": "dec_counter_opt_data_edge",
-        "text": "计数边沿(数据)"
+        "text": "计数边沿 (数据)"
     },
     {
         "id": "dec_counter_opt_divider",
-        "text": "字计数长度(字宽)"
+        "text": "字计数长度 (字宽)"
     },
     {
         "id": "dec_counter_opt_reset_edge",
-        "text": "清除（重置）计数器的边沿"
+        "text": "清除 (重置) 计数器的边沿"
     },
     {
         "id": "dec_counter_opt_edge_off",
@@ -229,7 +229,7 @@
     },
     {
         "id": "dec_dali_chan_dali",
-        "text": "DALI数据线"
+        "text": "DALI 数据线"
     },
     {
         "id": "dec_dali_opt_polarity",
@@ -241,7 +241,7 @@
     },
     {
         "id": "dec_dmx512_chan_dmx",
-        "text": "DMX数据线"
+        "text": "DMX 数据线"
     },
     {
         "id": "dec_dmx512_opt_invert",
@@ -249,7 +249,7 @@
     },
     {
         "id": "dec_dsi_chan_dsi",
-        "text": "DSI数据线"
+        "text": "DSI 数据线"
     },
     {
         "id": "dec_dsi_opt_polarity",
@@ -305,22 +305,22 @@
     },
     {
         "id": "dec_em4305_opt_w_one_max",
-        "text": "写1最大值"
+        "text": "写 1 最大值"
     },
     {
         "id": "dec_em4305_opt_w_zero_on_min",
-        "text": "写0起始最小值"
+        "text": "写 0 起始最小值"
     },
     {
         "id": "dec_em4305_opt_w_zero_off_max",
-        "text": "写0关闭最大值"
+        "text": "写 0 关闭最大值"
     },
     {
         "id": "dec_em4305_opt_em4100_decode",
-        "text": "EM4100解码器"
+        "text": "EM4100 解码器"
     },
     {
         "id": "dec_eth_an_chan_dp",
-        "text": "ETH TX+信号"
+        "text": "ETH TX+ 信号"
     }
 ]

@@ -1,15 +1,15 @@
 [
     {
         "id": "IDS_DEVICE_MODE_LOGIC",
-        "text": "逻辑分析仪(&L)"
+        "text": "逻辑分析仪 (&L)"
     },
     {
         "id": "IDS_DEVICE_MODE_ANALOG",
-        "text": "数据记录仪(&A)"
+        "text": "数据记录仪 (&A)"
     },
     {
         "id": "IDS_DEVICE_MODE_DSO",
-        "text": "示波器(&C)"
+        "text": "示波器 (&C)"
     },
     {
         "id": "IDS_TOOLBAR_DEVICE_TYPE_DEMO",
@@ -21,63 +21,63 @@
     },
     {
         "id": "IDS_TOOLBAR_DEVICE_OPTION",
-        "text": "选项(&O)"
+        "text": "选项 (&O)"
     },
     {
         "id": "IDS_TOOLBAR_CAPTURE_MODE",
-        "text": "模式(&E)"
+        "text": "模式 (&E)"
     },
     {
         "id": "IDS_TOOLBAR_CAPTURE_MODE_SINGLE",
-        "text": "单次(&S)"
+        "text": "单次 (&S)"
     },
     {
         "id": "IDS_TOOLBAR_CAPTURE_MODE_REPEAT",
-        "text": "重复(&R)"
+        "text": "重复 (&R)"
     },
     {
         "id": "IDS_TOOLBAR_CAPTURE_MODE_LOOP",
-        "text": "滚动(&L)"
+        "text": "滚动 (&L)"
     },
     {
         "id": "IDS_TOOLBAR_RUN_START",
-        "text": "开始(&S)"
+        "text": "开始 (&S)"
     },
     {
         "id": "IDS_TOOLBAR_RUN_STOP",
-        "text": "停止(&S)"
+        "text": "停止 (&S)"
     },
     {
         "id": "IDS_TOOLBAR_ONE_SINGLE",
-        "text": "单次(&I)"
+        "text": "单次 (&I)"
     },
     {
         "id": "IDS_TOOLBAR_ONE_INSTANT",
-        "text": "立即(&I)"
+        "text": "立即 (&I)"
     },
     {
         "id": "IDS_TOOLBAR_ONE_STOP",
-        "text": "停止(&S)"
+        "text": "停止 (&S)"
     },
     {
         "id": "IDS_TOOLBAR_TRIGGER",
-        "text": "触发(&T)"
+        "text": "触发 (&T)"
     },
     {
         "id": "IDS_TOOLBAR_DECODE",
-        "text": "解码(&D)"
+        "text": "解码 (&D)"
     },
     {
         "id": "IDS_TOOLBAR_MEASURE",
-        "text": "测量(&M)"
+        "text": "测量 (&M)"
     },
     {
         "id": "IDS_TOOLBAR_SEARCH",
-        "text": "搜索(&R)"
+        "text": "搜索 (&R)"
     },
     {
         "id": "IDS_TOOLBAR_FUNCTION",
-        "text": "函数(&N)"
+        "text": "函数 (&N)"
     },
     {
         "id": "IDS_TOOLBAR_FUNCTION_FFT",
@@ -85,75 +85,75 @@
     },
     {
         "id": "IDS_TOOLBAR_FUNCTION_MATH",
-        "text": "数学运算(&M)"
+        "text": "数学运算 (&M)"
     },
     {
         "id": "IDS_TOOLBAR_DISPLAY",
-        "text": "显示(&P)"
+        "text": "显示 (&P)"
     },
     {
         "id": "IDS_TOOLBAR_DISPLAY_THEMES",
-        "text": "主题(&T)"
+        "text": "主题 (&T)"
     },
     {
         "id": "IDS_TOOLBAR_DISPLAY_LISSAJOUS",
-        "text": "李萨如图(&A)"
-    },  
+        "text": "李萨如图 (&A)"
+    },
     {
         "id": "IDS_TOOLBAR_DISPLAY_THEMES_DARK",
-        "text": "暗黑(&D)"
+        "text": "暗黑 (&D)"
     },
     {
         "id": "IDS_TOOLBAR_DISPLAY_THEMES_LIGHT",
-        "text": "清新(&L)"
-    },   
+        "text": "清新 (&L)"
+    },
     {
         "id": "IDS_TOOLBAR_DISPLAY_OPTIONS",
-        "text": "选项(&O)"
+        "text": "选项 (&O)"
     },
     {
         "id": "IDS_TOOLBAR_FILE",
-        "text": "文件(&F)"
+        "text": "文件 (&F)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_CONFIG",
-        "text": "配置(&G)"
+        "text": "配置 (&G)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_CONFIG_LOAD",
-        "text": "加载配置(&L)"
+        "text": "加载配置 (&L)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_CONFIG_STORE",
-        "text": "保存配置(&S)"
+        "text": "保存配置 (&S)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_CONFIG_DEFAULT",
-        "text": "加载默认配置(&D)"
+        "text": "加载默认配置 (&D)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_OPEN",
-        "text": "打开(&O)"
+        "text": "打开 (&O)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_SAVE",
-        "text": "保存(&S)"
+        "text": "保存 (&S)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_EXPORT",
-        "text": "导出(&E)"
+        "text": "导出 (&E)"
     },
     {
         "id": "IDS_TOOLBAR_FILE_CAPTURE",
-        "text": "截屏(&C)"
+        "text": "截屏 (&C)"
     },
     {
         "id": "IDS_TOOLBAR_HELP",
-        "text": "帮助(&H)"
+        "text": "帮助 (&H)"
     },
     {
         "id": "IDS_TOOLBAR_HELP_LANG",
-        "text": "语言(&L)"
+        "text": "语言 (&L)"
     },
     {
         "id": "IDS_TOOLBAR_HELP_LANG_EN",
@@ -161,26 +161,26 @@
     },
     {
         "id": "IDS_TOOLBAR_HELP_LANG_CN",
-        "text": "中文(&C)"
+        "text": "中文 (&C)"
     },
     {
         "id": "IDS_TOOLBAR_HELP_ABOUT",
-        "text": "关于(&A)"
+        "text": "关于 (&A)"
     },
     {
         "id": "IDS_TOOLBAR_HELP_MANUAL",
-        "text": "手册(&M)"
+        "text": "手册 (&M)"
     },
     {
         "id": "IDS_TOOLBAR_HELP_BUG",
-        "text": "报告问题(&B)"
+        "text": "报告问题 (&B)"
     },
     {
         "id": "IDS_TOOLBAR_HELP_UPDATE",
-        "text": "更新(&U)"
+        "text": "更新 (&U)"
     },
     {
         "id": "IDS_TOOLBAR_HELP_LOG",
-        "text": "日志选项(&L)"
+        "text": "日志选项 (&L)"
     }
 ]
