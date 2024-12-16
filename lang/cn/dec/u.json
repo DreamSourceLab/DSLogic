@@ -5,11 +5,11 @@
     },
     {
         "id": "dec_usb_power_delivery_chan_cc1",
-        "text": "配置通道1"
+        "text": "配置通道 1"
     },
     {
         "id": "dec_usb_power_delivery_opt_chan_cc2",
-        "text": "配置通道2"
+        "text": "配置通道 2"
     },
     {
         "id": "dec_usb_power_delivery_opt_fulltext",
@@ -17,11 +17,11 @@
     },
     {
         "id": "dec_usb_signalling_chan_dp",
-        "text": "USB D+信号"
+        "text": "USB D+ 信号"
     },
     {
         "id": "dec_usb_signalling_chan_dm",
-        "text": "USB D-信号"
+        "text": "USB D- 信号"
     },
     {
         "id": "dec_usb_signalling_opt_signalling",
@@ -29,11 +29,11 @@
     },
     {
         "id": "dec_wiegand_chan_d0",
-        "text": "数据0线"
+        "text": "数据 0 线"
     },
     {
         "id": "dec_wiegand_chan_d1",
-        "text": "数据1线"
+        "text": "数据 1 线"
     },
     {
         "id": "dec_wiegand_opt_active",
@@ -53,23 +53,23 @@
     },
     {
         "id": "dec_xy2-100_chan_data",
-        "text": "X、Y或Z轴数据"
+        "text": "X、Y 或 Z 轴数据"
     },
     {
         "id": "dec_xy2-100_opt_chan_status",
-        "text": "X、Y或Z轴状态"
-    },    
+        "text": "X、Y 或 Z 轴状态"
+    },
     {
         "id": "dec_z80_chan_m1",
         "text": "机器周期 1"
     },
     {
         "id": "dec_z80_chan_rd",
-        "text": "内存或I/O读取"
+        "text": "内存或 I/O 读取"
     },
     {
         "id": "dec_z80_chan_wr",
-        "text": "内存或I/O写入"
+        "text": "内存或 I/O 写入"
     },
     {
         "id": "dec_z80_opt_chan_mreq",
@@ -77,6 +77,6 @@
     },
     {
         "id": "dec_z80_opt_chan_iorq",
-        "text": "I/O请求"
+        "text": "I/O 请求"
     }
 ]

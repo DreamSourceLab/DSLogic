@@ -49,7 +49,7 @@
     },
     {
         "id": "IDS_DLG_CHECK_USB_SPEED_ERROR",
-        "text": "当前设备插入USB 2.0端口会严重影响其性能.\n请重新插入USB 3.0端口."
+        "text": "当前设备插入 USB 2.0 端口会严重影响其性能.\n请重新插入 USB 3.0 端口."
     },
     {
         "id": "IDS_DLG_CHECK_SESSION_FILE_VERSION_ERROR",
@@ -149,11 +149,11 @@
     },
     {
         "id": "IDS_DLG_FFT_ENABLE",
-        "text": "FFT使能: "
+        "text": "FFT 使能: "
     },
     {
         "id": "IDS_DLG_FFT_LENGTH",
-        "text": "FFT长度: "
+        "text": "FFT 长度: "
     },
     {
         "id": "IDS_DLG_SAMPLE_INTERVAL",
@@ -161,11 +161,11 @@
     },
     {
         "id": "IDS_DLG_FFT_SOURCE",
-        "text": "FFT通道: "
+        "text": "FFT 通道: "
     },
     {
         "id": "IDS_DLG_FFT_WINDOW",
-        "text": "FFT加窗: "
+        "text": "FFT 加窗: "
     },
     {
         "id": "IDS_DLG_DC_IGNORED",
@@ -173,19 +173,19 @@
     },
     {
         "id": "IDS_DLG_Y-AXIS_MODE",
-        "text": "Y轴模式: "
+        "text": "Y 轴模式: "
     },
     {
         "id": "IDS_DLG_DBV_RANGE",
-        "text": "DBV范围: "
+        "text": "DBV 范围: "
     },
     {
         "id": "IDS_DLG_FFT_OPTIONS",
-        "text": "FFT选项"
+        "text": "FFT 选项"
     },
     {
         "id": "IDS_DLG_INTERVAL_S",
-        "text": "间隔(s): "
+        "text": "间隔 (s): "
     },
     {
         "id": "IDS_DLG_REPETITIVE_INTERVAL",
@@ -193,11 +193,11 @@
     },
     {
         "id": "IDS_DLG_X_AXIS",
-        "text": "X轴"
+        "text": "X 轴"
     },
     {
         "id": "IDS_DLG_Y_AXIS",
-        "text": "Y轴"
+        "text": "Y 轴"
     },
     {
         "id": "IDS_DLG_LISSAJOUS_OPTIONS",
@@ -302,7 +302,7 @@
     {
         "id": "IDS_DLG_EXPORTING",
         "text": "导出中..."
-    },  
+    },
     {
         "id": "IDS_DLG_DONT_CONNECT_PROBES",
         "text": "不要连接任何探头!"
@@ -490,7 +490,7 @@
     {
         "id": "IDS_DLG_SERIAL_TRIGGER",
         "text": "串行触发"
-    },   
+    },
     {
         "id": "IDS_DLG_STAGE_TRIGGER",
         "text": "多级触发"
@@ -498,7 +498,7 @@
     {
         "id": "IDS_DLG_SERIAL_NOTE_LABEL",
         "text": "X: 不关心\n0: 低电平\n1: 高电平\nR: 上升沿\nF: 下降沿\nC: 上升/下降沿"
-    },  
+    },
     {
         "id": "IDS_DLG_DATA_BITS",
         "text": "数据位"
@@ -577,7 +577,7 @@
     },
     {
         "id": "IDS_DLG_AUTO_ROLL",
-        "text": "自动(Roll)"
+        "text": "自动 (Roll)"
     },
     {
         "id": "IDS_DLG_WAITING_TRIG",
@@ -606,7 +606,7 @@
     {
         "id": "IDS_DLG_FALLING",
         "text": "下降沿: "
-    },   
+    },
     {
         "id": "IDS_DLG_Edges_1",
         "text": "总边沿: "

@@ -1,11 +1,11 @@
 [
     {
         "id": "Buffer Mode",
-        "text": "Buffer模式"
+        "text": "Buffer 模式"
     },
     {
         "id": "Stream Mode",
-        "text": "Stream模式"
+        "text": "Stream 模式"
     },
     {
         "id": "Internal Test",
@@ -33,7 +33,7 @@
     },
     {
         "id": "1 Sample Clock",
-        "text": "1个采样周期"
+        "text": "1 个采样周期"
     },
     {
         "id": "Normal",

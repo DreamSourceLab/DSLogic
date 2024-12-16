@@ -1,7 +1,7 @@
 [
     {
         "id": "dec_lfast_chan_data",
-        "text": "TXP或RXP"
+        "text": "TXP 或 RXP"
     },
     {
         "id": "dec_lin_opt_version",
@@ -13,7 +13,7 @@
     },
     {
         "id": "dec_lm75_opt_resolution",
-        "text": "分辨率（位）"
+        "text": "分辨率 (位)"
     },
     {
         "id": "dec_lpc_chan_lframe",
@@ -45,7 +45,7 @@
     },
     {
         "id": "dec_lpc_opt_chan_ldrq",
-        "text": "编码的DMA/总线主请求"
+        "text": "编码的 DMA/总线主请求"
     },
     {
         "id": "dec_lpc_opt_chan_serirq",
@@ -57,7 +57,7 @@
     },
     {
         "id": "dec_lpc_opt_chan_lpme",
-        "text": "LPC电源管理事件"
+        "text": "LPC 电源管理事件"
     },
     {
         "id": "dec_lpc_opt_chan_lpcpd",
@@ -73,11 +73,11 @@
     },
     {
         "id": "dec_ltc26x7_opt_vref",
-        "text": "参考电压(V)"
+        "text": "参考电压 (V)"
     },
     {
         "id": "dec_ltc242x_opt_vref",
-        "text": "参考电压(V)"
+        "text": "参考电压 (V)"
     },
     {
         "id": "dec_maple_bus_chan_sdcka",
@@ -141,11 +141,11 @@
     },
     {
         "id": "dec_mipi_dsi_chan_D0N",
-        "text": "LP数据0负"
+        "text": "LP 数据 0 负"
     },
     {
         "id": "dec_mipi_dsi_chan_D0P",
-        "text": "LP数据0正"
+        "text": "LP 数据 0 正"
     },
     {
         "id": "dec_mipi_rffe_chan_sclk",
@@ -173,7 +173,7 @@
     },
     {
         "id": "dec_nes_gamepad_opt_variant",
-        "text": "Gamepad变体"
+        "text": "Gamepad 变体"
     },
     {
         "id": "dec_nrf24l01_opt_chip",

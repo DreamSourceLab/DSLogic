@@ -33,11 +33,11 @@
     },
     {
         "id": "dec_0spi_opt_cpol",
-        "text": "时钟极性(CPOL)"
+        "text": "时钟极性 (CPOL)"
     },
     {
         "id": "dec_0spi_opt_cpha",
-        "text": "时钟相位(CPHA)"
+        "text": "时钟相位 (CPHA)"
     },
     {
         "id": "dec_0spi_opt_bitorder",
@@ -49,7 +49,7 @@
     },
     {
         "id": "dec_0uart_chan_rxtx",
-        "text": "UART信号线"
+        "text": "UART 信号线"
     },
     {
         "id": "dec_0uart_opt_baudrate",
@@ -121,11 +121,11 @@
     },
     {
         "id": "dec_1spi_opt_cpol",
-        "text": "时钟极性(CPOL)"
+        "text": "时钟极性 (CPOL)"
     },
     {
         "id": "dec_1spi_opt_cpha",
-        "text": "时钟相位(CPHA)"
+        "text": "时钟相位 (CPHA)"
     },
     {
         "id": "dec_1spi_opt_bitorder",
@@ -141,7 +141,7 @@
     },
     {
         "id": "dec_1uart_chan_rxtx",
-        "text": "UART信号线"
+        "text": "UART 信号线"
     },
     {
         "id": "dec_1uart_opt_baudrate",

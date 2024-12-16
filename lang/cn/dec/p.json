@@ -1,4 +1,4 @@
-[   
+[
     {
         "id": "dec_parallel_opt_clock_edge",
         "text": "采样时钟边沿"
@@ -21,7 +21,7 @@
     },
     {
         "id": "dec_pjdl_opt_idle_add_us",
-        "text": "增加空闲时间（us）"
+        "text": "增加空闲时间 (us)"
     },
     {
         "id": "dec_ps2_chan_clk",
@@ -53,7 +53,7 @@
     },
     {
         "id": "dec_qi_chan_qi",
-        "text": "解调后的Qi信号"
+        "text": "解调后的 Qi 信号"
     },
     {
         "id": "dec_qspi_chan_clk",
@@ -61,19 +61,19 @@
     },
     {
         "id": "dec_qspi_chan_io0",
-        "text": "数据I/O 0"
+        "text": "数据 I/O 0"
     },
     {
         "id": "dec_qspi_opt_chan_io1",
-        "text": "数据I/O 1"
+        "text": "数据 I/O 1"
     },
     {
         "id": "dec_qspi_opt_chan_io2",
-        "text": "数据I/O 2"
+        "text": "数据 I/O 2"
     },
     {
         "id": "dec_qspi_opt_chan_io3",
-        "text": "数据I/O 3"
+        "text": "数据 I/O 3"
     },
     {
         "id": "dec_qspi_opt_chan_cs",
@@ -85,11 +85,11 @@
     },
     {
         "id": "dec_qspi_opt_cpol",
-        "text": "时钟极性(CPOL)"
+        "text": "时钟极性 (CPOL)"
     },
     {
         "id": "dec_qspi_opt_cpha",
-        "text": "时钟相位(CPHA)"
+        "text": "时钟相位 (CPHA)"
     },
     {
         "id": "dec_qspi_opt_bitorder",
@@ -109,7 +109,7 @@
     },
     {
         "id": "dec_rgb_led_ws281x_chan_din",
-        "text": "DIN数据线"
+        "text": "DIN 数据线"
     },
     {
         "id": "dec_rgb_led_ws281x_opt_default_color_order",
@@ -165,7 +165,7 @@
     },
     {
         "id": "dec_sdq_chan_sdq",
-        "text": "单线SDQ数据线"
+        "text": "单线 SDQ 数据线"
     },
     {
         "id": "dec_sdq_opt_bitrate",
@@ -173,31 +173,31 @@
     },
     {
         "id": "dec_seven_segment_chan_A",
-        "text": "A段"
+        "text": "A 段"
     },
     {
         "id": "dec_seven_segment_chan_B",
-        "text": "B段"
+        "text": "B 段"
     },
     {
         "id": "dec_seven_segment_chan_C",
-        "text": "C段"
+        "text": "C 段"
     },
     {
         "id": "dec_seven_segment_chan_D",
-        "text": "D段"
+        "text": "D 段"
     },
     {
         "id": "dec_seven_segment_chan_E",
-        "text": "E段"
+        "text": "E 段"
     },
     {
         "id": "dec_seven_segment_chan_F",
-        "text": "F段"
+        "text": "F 段"
     },
     {
         "id": "dec_seven_segment_chan_G",
-        "text": "G段"
+        "text": "G 段"
     },
     {
         "id": "dec_seven_segment_opt_chan_dp",
@@ -249,7 +249,7 @@
     },
     {
         "id": "dec_sle44xx_chan_io",
-        "text": "I/O数据线"
+        "text": "I/O 数据线"
     },
     {
         "id": "dec_spdif_chan_data",
@@ -257,7 +257,7 @@
     },
     {
         "id": "dec_spi_tpm_opt_tpm_version",
-        "text": "TPM版本为1.2或2.0"
+        "text": "TPM 版本为 1.2 或 2.0"
     },
     {
         "id": "dec_spiflash_opt_chip",
@@ -337,7 +337,7 @@
     },
     {
         "id": "dec_swim_chan_swim",
-        "text": "SWIM信号"
+        "text": "SWIM 信号"
     },
     {
         "id": "dec_t55xx_chan_data",
@@ -357,19 +357,19 @@
     },
     {
         "id": "dec_t55xx_opt_w_one_min",
-        "text": "写入1最小值"
+        "text": "写入 1 最小值"
     },
     {
         "id": "dec_t55xx_opt_w_one_max",
-        "text": "写入1最大值"
+        "text": "写入 1 最大值"
     },
     {
         "id": "dec_t55xx_opt_w_zero_min",
-        "text": "写入0最小值"
+        "text": "写入 0 最小值"
     },
     {
         "id": "dec_t55xx_opt_w_zero_max",
-        "text": "写入0最大值"
+        "text": "写入 0 最大值"
     },
     {
         "id": "dec_t55xx_opt_em4100_decode",
@@ -433,22 +433,22 @@
     },
     {
         "id": "dec_tlc5620_opt_chan_ldac",
-        "text": "负载DAC"
+        "text": "负载 DAC"
     },
     {
         "id": "dec_tlc5620_opt_vref_a",
-        "text": "参考电压 DACA(V)"
+        "text": "参考电压 DACA (V)"
     },
     {
         "id": "dec_tlc5620_opt_vref_b",
-        "text": "参考电压 DACB(V)"
+        "text": "参考电压 DACB (V)"
     },
     {
         "id": "dec_tlc5620_opt_vref_c",
-        "text": "参考电压 DACC(V)"
+        "text": "参考电压 DACC (V)"
     },
     {
         "id": "dec_tlc5620_opt_vref_d",
-        "text": "参考电压 DACD(V)"
+        "text": "参考电压 DACD (V)"
     }
 ]

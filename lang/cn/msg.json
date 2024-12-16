@@ -10,10 +10,11 @@
     {
         "id": "IDS_MSG_CANCEL",
         "text": "取消"
-    },{
+    },
+    {
         "id": "IDS_MSG_ATTENTION",
         "text": "注意"
-    },   
+    },
     {
         "id": "IDS_MSG_ERROR",
         "text": "错误"
@@ -21,11 +22,11 @@
     {
         "id": "IDS_MSG_INFORMATION",
         "text": "消息"
-    }, 
+    },
     {
         "id": "IDS_MSG_CONTINUE",
         "text": "继续"
-    }, 
+    },
     {
         "id": "IDS_MSG_AUTO_CALIB_START",
         "text": "自动校准程序将启动。不要连接任何探头。\n这可能需要一段时间!"
@@ -68,7 +69,7 @@
     },
     {
         "id": "IDS_MSG_DECODER_REPEAT",
-        "text": "存在重复id或name的解码器:"
+        "text": "存在重复 id 或 name 的解码器:"
     },
     {
         "id": "IDS_MSG_DECODER_LIST_EMPTY",
@@ -93,7 +94,7 @@
     {
         "id": "IDS_MSG_DECODER_CONFIRM_DEL",
         "text": "是否确定要移除这个解码器?"
-    },   
+    },
     {
         "id": "IDS_MSG_CLOSE_DEVICE",
         "text": "是否确定要移除这个设备?"
@@ -172,7 +173,7 @@
     },
     {
         "id": "IDS_MSG_AD_TRIGGER_NEED_HARDWARE",
-        "text": "高级触发需要DSLogic硬件支持!"
+        "text": "高级触发需要 DSLogic 硬件支持!"
     },
     {
         "id": "IDS_MSG_SET_TRI_MULTI_CHANNEL",
@@ -228,7 +229,7 @@
     },
     {
         "id": "IDS_MSG_DATA_OVERFLOW_DET",
-        "text": "USB带宽无法支持当前采样设置!\n请降低采样率或者通道数!"
+        "text": "USB 带宽无法支持当前采样设置!\n请降低采样率或者通道数!"
     },
     {
         "id": "IDS_MSG_UNDEFINED_ERROR",
@@ -240,7 +241,7 @@
     },
     {
         "id": "IDS_MSG_STORESESS_SAVESTART_ERROR1",
-        "text": "DSView当前不支持\n多数据类型的文件保存."
+        "text": "DSView 当前不支持\n多数据类型的文件保存."
     },
     {
         "id": "IDS_MSG_STORESESS_SAVESTART_ERROR2",
@@ -264,19 +265,19 @@
     },
     {
         "id": "IDS_MSG_STORESESS_SAVESTART_ERROR7",
-        "text": "生成zip文件失败."
+        "text": "生成 zip 文件失败."
     },
     {
         "id": "IDS_MSG_STORESESS_SAVEPROC_ERROR1",
-        "text": "无法创建zip文件,内存分配错误."
+        "text": "无法创建 zip 文件,内存分配错误."
     },
     {
         "id": "IDS_MSG_STORESESS_SAVEPROC_ERROR2",
-        "text": "无法创建zip文件,请检查此路径的写入权限."
+        "text": "无法创建 zip 文件,请检查此路径的写入权限."
     },
     {
         "id": "IDS_MSG_STORESESS_EXPORTSTART_ERROR1",
-        "text": "DSView当前不支持\n多数据类型的文件导出."
+        "text": "DSView 当前不支持\n多数据类型的文件导出."
     },
     {
         "id": "IDS_MSG_STORESESS_EXPORTSTART_ERROR2",
@@ -380,7 +381,7 @@
     },
     {
         "id": "IDS_MSG_DEVICE_USB_IO_ERROR",
-        "text": "Error: USB读写错误!"
+        "text": "Error: USB 读写错误!"
     },
     {
         "id": "IDS_MSG_DATA_RANGE_ERROR",
