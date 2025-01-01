@@ -1356,11 +1356,11 @@ void Viewport::wheelEvent(QWheelEvent *event)
     delta = event->delta();
     isVertical = event->orientation() == Qt::Vertical;
 #endif
-
-    double zoom_scale = delta / 80;
+    double divisor_zoom = 16;
+    double zoom_scale = delta / 80 / divisor_zoom;
 
     if (ABS_VAL(delta) <= 80){
-        zoom_scale = delta > 0 ? 1.5 : -1.5;
+        zoom_scale = delta > 0 ? 1.5 / divisor_zoom : -1.5 / divisor_zoom;
     }
 
     if (_type == FFT_VIEW)
