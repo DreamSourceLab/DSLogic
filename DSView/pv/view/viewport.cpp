@@ -1356,11 +1356,12 @@ void Viewport::wheelEvent(QWheelEvent *event)
     delta = event->delta();
     isVertical = event->orientation() == Qt::Vertical;
 #endif
-    double divisor_zoom = 16;
-    double zoom_scale = delta / 80 / divisor_zoom;
+    // Retrieve the scrollSpeed value from the settings
+    double scrollSpeed = AppConfig::Instance().appOptions.scrollSpeed;
+    double zoom_scale = delta / 80 * scrollSpeed;
 
     if (ABS_VAL(delta) <= 80){
-        zoom_scale = delta > 0 ? 1.5 / divisor_zoom : -1.5 / divisor_zoom;
+        zoom_scale = delta > 0 ? 1.5 * scrollSpeed : -1.5 * scrollSpeed;
     }
 
     if (_type == FFT_VIEW)
