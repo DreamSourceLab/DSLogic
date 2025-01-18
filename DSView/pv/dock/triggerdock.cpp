@@ -33,6 +33,7 @@
 #include <QSplitter>
 #include <QInputMethodEvent>
 #include <QApplication>
+#include <QFontDatabase>
 #include <math.h>
 #include <libsigrok.h>
 
@@ -151,7 +152,6 @@ void TriggerDock::retranslateUi()
     _serial_edge_label->setText(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_CLOCK_FLAG), "Clock Flag: "));
     _serial_data_label->setText(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_DATA_CHANNEL), "Data Channel: "));
     _serial_value_label->setText(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_DATA_VALUE), "Data Value: "));
-    _serial_groupBox->setTitle(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_SERIAL_TRIGGER), "Serial Trigger"));
     _serial_hex_label->setText(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_SERIAL_HEX), "Hex: "));
     _serial_hex_ck_label->setText(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_SERIAL_INPUT_AS_HEX), "Input hex"));
 
@@ -171,10 +171,6 @@ void TriggerDock::retranslateUi()
 
     for (int i = 0; i < _contiguous_label_list.length(); i++){
         _contiguous_label_list.at(i)->setText(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_CONTIGUOUS), "Contiguous"));
-    }
-
-    for (int i = 0; i < _stage_groupBox_list.length(); i++){
-        _stage_groupBox_list.at(i)->setTitle(L_S(STR_PAGE_DLG, S_ID(IDS_DLG_STAGE), "Stage")+QString::number(i));
     }
 
     for (int i = 0; i < _stage_note_label_list.length(); i++){
@@ -564,11 +560,7 @@ void TriggerDock::setup_adv_tab()
     _value0_ext32_lineEdit_list.clear();
     _value1_ext32_lineEdit_list.clear();
 
-   // QFont font("Monaco");
-   // font.setStyleHint(QFont::Monospace);
-   // font.setFixedPitch(true);
-
-    QFont font = this->font();
+    QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     font.setPointSizeF(AppConfig::Instance().appOptions.fontSize);
 
     _stage_tabWidget = new QTabWidget(_widget);
@@ -709,6 +701,7 @@ void TriggerDock::setup_adv_tab()
         stage_layout->addLayout(stage_glayout);
         stage_layout->addSpacing(20);
         QLabel *stage_note_label = new QLabel(_stage_tabWidget);
+        stage_note_label->setFont(font);
         _stage_note_label_list.push_back(stage_note_label);
         stage_layout->addWidget(stage_note_label);
         stage_layout->addStretch(1);
@@ -716,6 +709,7 @@ void TriggerDock::setup_adv_tab()
         QGroupBox *stage_groupBox = new QGroupBox(_stage_tabWidget);
         stage_groupBox->setContentsMargins(5, 15, 5, 5);
         stage_groupBox->setFlat(true);
+        stage_groupBox->setStyleSheet("margin-top: 0px");
         stage_groupBox->setLayout(stage_layout);
         _stage_groupBox_list.push_back(stage_groupBox);
 
@@ -725,6 +719,7 @@ void TriggerDock::setup_adv_tab()
     _serial_groupBox = new QGroupBox(_widget);
     _serial_groupBox->setContentsMargins(5, 15, 5, 5);
     _serial_groupBox->setFlat(true);
+    _serial_groupBox->setStyleSheet("margin-top: 0px");
 
     _serial_start_label = new QLabel(_serial_groupBox);
     _serial_start_lineEdit = new PopupLineEdit("X X X X X X X X X X X X X X X X", _serial_groupBox);
@@ -903,6 +898,8 @@ void TriggerDock::setup_adv_tab()
     serial_glayout->addWidget(hex_wid, row++, 1, 1, 3);
 
     _serial_note_label = new QLabel(_serial_groupBox);
+    _serial_note_label->setFont(font);
+
     serial_layout->addLayout(serial_glayout);
     serial_layout->addSpacing(20);
     serial_layout->addWidget(_serial_note_label);
@@ -1079,7 +1076,6 @@ void TriggerDock::UpdateFont()
 {
     QFont font = this->font();
     font.setPointSizeF(AppConfig::Instance().appOptions.fontSize);
-    ui::set_form_font(this, font);
     font.setPointSizeF(font.pointSizeF() + 1);
     this->parentWidget()->setFont(font);
     

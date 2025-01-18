@@ -24,6 +24,7 @@
 #include <assert.h>
 #include <QRegularExpressionValidator>
 #include <QTimer>
+#include <QFontDatabase>
 #include "../ui/langresource.h"
  
 
@@ -49,10 +50,7 @@ Search::Search(QWidget *parent, SigSession *session, std::map<uint16_t, QString>
     _session(session)
 {
 
-    QFont font("Monaco");
-    font.setStyleHint(QFont::Monospace);
-    font.setFixedPitch(true);
-    //this->setMinimumWidth(350);
+    QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
 
     QRegularExpression value_rx("[10XRFCxrfc]+");
     QValidator *value_validator = new QRegularExpressionValidator(value_rx, this);
