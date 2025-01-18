@@ -21,6 +21,7 @@
     "Trigger source": 0,
     "Using Clock Negedge": 0,
     "Using External Clock": 0,
+    "Ext. Clock Frequency [Hz]": 1000000,
     "Version": 3,
     "channel": [
         {

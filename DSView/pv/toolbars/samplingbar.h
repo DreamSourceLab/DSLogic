@@ -31,6 +31,7 @@
 #include <QToolBar> 
 #include <QAction>
 #include <QMenu>
+#include <QLabel>
 #include "../ui/dscombobox.h"
 #include "../interface/icallbacks.h"
 #include "../ui/xtoolbutton.h"
@@ -151,6 +152,7 @@ namespace pv
             DsComboBox          _device_selector;
             XToolButton         _configure_button;           
             DsComboBox          _sample_count;
+            QLabel              *_sample_at;
             DsComboBox          _sample_rate;          
             XToolButton         _run_stop_button;
             XToolButton         _instant_button;

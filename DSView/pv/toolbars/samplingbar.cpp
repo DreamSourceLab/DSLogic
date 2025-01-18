@@ -106,7 +106,8 @@ namespace pv
 
             addWidget(&_sample_count);
             //tr
-            addWidget(new QLabel(" @ "));
+            _sample_at = new QLabel(" @ ");
+            addWidget(_sample_at);
             addWidget(&_sample_rate);
 
             _action_single = new QAction(this);
@@ -426,6 +427,8 @@ namespace pv
 
             _sample_rate.setMinimumWidth(_sample_rate.sizeHint().width() + 15);
             _sample_rate.view()->setMinimumWidth(_sample_rate.sizeHint().width() + 30);
+
+            _sample_at->setText(_device_agent->is_external_clock() ? " @ ext." : " @ ");
 
             _updating_sample_rate = false;
             g_variant_unref(gvar_dict);
@@ -1055,7 +1058,7 @@ namespace pv
                 _run_stop_action->setVisible(true);
                 _instant_action->setVisible(true);
             }
-        
+
             retranslateUi();
             reStyle();
             update();

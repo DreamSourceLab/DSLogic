@@ -142,6 +142,7 @@ static const int32_t hwoptions[] = {
     SR_CONF_RLE_SUPPORT,
     SR_CONF_CLOCK_TYPE,
     SR_CONF_CLOCK_EDGE,
+    SR_CONF_EXT_SAMPLERATE,
 };
 
 static const int32_t hwoptions_pro[] = {
@@ -153,6 +154,7 @@ static const int32_t hwoptions_pro[] = {
     SR_CONF_RLE_SUPPORT,
     SR_CONF_CLOCK_TYPE,
     SR_CONF_CLOCK_EDGE,
+    SR_CONF_EXT_SAMPLERATE,
 };
 
 static const int32_t sessions[] = {
@@ -172,6 +174,7 @@ static const int32_t sessions[] = {
     SR_CONF_HORIZ_TRIGGERPOS,
     SR_CONF_TRIGGER_HOLDOFF,
     SR_CONF_TRIGGER_MARGIN,
+    SR_CONF_EXT_SAMPLERATE,
 };
 
 static const int32_t sessions_pro[] = {
@@ -192,6 +195,7 @@ static const int32_t sessions_pro[] = {
     SR_CONF_HORIZ_TRIGGERPOS,
     SR_CONF_TRIGGER_HOLDOFF,
     SR_CONF_TRIGGER_MARGIN,
+    SR_CONF_EXT_SAMPLERATE,
 };
 
 SR_PRIV struct sr_dev_driver DSLogic_driver_info;
@@ -251,6 +255,7 @@ static struct DSL_context *DSLogic_dev_new(const struct DSL_profile *prof)
     devc->trigger_margin = 8;
     devc->trigger_channel = 0;
 
+    devc->ext_samplerate = 1000000;
     dsl_adjust_samplerate(devc);
 
 	return devc;
@@ -729,6 +734,9 @@ static int config_get(int id, GVariant **data, const struct sr_dev_inst *sdi,
         case SR_CONF_TOTAL_CH_NUM:
             *data = g_variant_new_int16(devc->profile->dev_caps.total_ch_num);
             break;
+        case SR_CONF_EXT_SAMPLERATE:
+            *data = g_variant_new_uint64(devc->ext_samplerate);
+            break;
         default:
             return SR_ERR_NA;
         }
@@ -1172,6 +1180,10 @@ static int config_set(int id, GVariant *data, struct sr_dev_inst *sdi,
     else if (id == SR_CONF_LOOP_MODE){
         devc->is_loop = g_variant_get_boolean(data);
         sr_info("Set device loop mode:%d", devc->is_loop);
+    }
+    else if (id == SR_CONF_EXT_SAMPLERATE) {
+        devc->ext_samplerate = g_variant_get_uint64(data);
+        sr_info("Set device ext samplerate: %d", devc->ext_samplerate);
     }
     else {
         ret = SR_ERR_NA;

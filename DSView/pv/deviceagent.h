@@ -113,7 +113,18 @@ public:
      */
     uint64_t get_sample_rate();
 
-       /**
+    /**
+     * @brief Checks if the device is using an external clock source
+     *
+     * This function determines whether the device is currently configured to use
+     * an external clock source for timing/sampling instead of its internal clock.
+     *
+     * @return true If the device is using an external clock source
+     * @return false If the device is using its internal clock source
+     */
+    bool is_external_clock();
+
+     /**
      * @brief Gets the time base from the driver.
      *
      * @return The returned time base from the driver, or 0 if the

@@ -51,6 +51,7 @@ static struct sr_config_info sr_config_info_data[] = {
     {SR_CONF_LIMIT_SAMPLES, SR_T_UINT64,"Sample count"},
     {SR_CONF_ACTUAL_SAMPLES, SR_T_UINT64,"Sample count-actual"},
     {SR_CONF_CLOCK_TYPE, SR_T_BOOL,"Using External Clock"},
+		{SR_CONF_EXT_SAMPLERATE, SR_T_UINT64, "Ext. Clock Frequency [Hz]"},
     {SR_CONF_CLOCK_EDGE, SR_T_BOOL, "Using Clock Negedge"},
     {SR_CONF_CAPTURE_RATIO, SR_T_UINT64,"Pre-trigger capture ratio"},
     {SR_CONF_PATTERN_MODE, SR_T_CHAR,"Operation Mode"},

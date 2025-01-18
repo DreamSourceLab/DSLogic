@@ -126,8 +126,15 @@ uint64_t DeviceAgent::get_sample_rate()
     uint64_t v;
     GVariant* gvar = NULL;
 
-    ds_get_actived_device_config(NULL, NULL, SR_CONF_SAMPLERATE, &gvar);
+    int key;
 
+    if(is_external_clock()) {
+        key = SR_CONF_EXT_SAMPLERATE;
+    } else {
+        key = SR_CONF_SAMPLERATE;
+    }
+
+    ds_get_actived_device_config(NULL, NULL, key, &gvar);
 	if (gvar != NULL) {
         v = g_variant_get_uint64(gvar);
 		g_variant_unref(gvar);
@@ -137,6 +144,22 @@ uint64_t DeviceAgent::get_sample_rate()
 	}
 
 	return v;
+}
+
+bool DeviceAgent::is_external_clock()
+{
+    assert(_dev_handle);
+
+    bool ct = false;
+    GVariant* gvar = NULL;
+
+    ds_get_actived_device_config(NULL, NULL, SR_CONF_CLOCK_TYPE, &gvar);
+    if (gvar != NULL) {
+        ct = g_variant_get_boolean(gvar);
+        g_variant_unref(gvar);
+    }
+
+    return ct;
 }
 
 uint64_t DeviceAgent::get_time_base()

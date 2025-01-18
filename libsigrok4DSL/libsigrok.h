@@ -1094,6 +1094,9 @@ enum sr_config_option_id
 	 * starts or stops the internal logging. */
 	SR_CONF_DATALOG = 50007,
 
+	/** Manually entered sample rate as supplement for external clock mode */
+	SR_CONF_EXT_SAMPLERATE = 50008,
+
 	SR_CONF_LOOP_MODE = 60001,
 };
 

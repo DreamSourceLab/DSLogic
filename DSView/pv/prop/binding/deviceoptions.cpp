@@ -118,6 +118,10 @@ DeviceOptions::DeviceOptions()
             bind_bool(name, label, key);
             break;
 
+        case SR_CONF_EXT_SAMPLERATE:
+            bind_int(name, label, key, "", pair<int64_t, int64_t>(10000, 1000000000));
+            break;
+
 		case SR_CONF_TIMEBASE:
             bind_enum(name, label, key, gvar_list, print_timebase);
 			break;
