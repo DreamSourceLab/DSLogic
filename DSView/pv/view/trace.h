@@ -107,7 +107,15 @@ public:
 	 * Sets the vertical layout offset of this signal.
 	 */
 	inline void set_v_offset(int v_offset){
-        _v_offset = v_offset;
+        _v_offset_orig = _v_offset = v_offset;
+    }
+
+    /**
+     * Sets the vertical scroll offset of this signal.
+     * (additional v_offset displacement)
+     */
+    inline void update_v_scroll(int v_scroll) {
+        _v_offset = _v_offset_orig + v_scroll;
     }
 
     /**
@@ -336,6 +344,7 @@ protected:
 	QString _name;
 	QColor _colour;
 	int _v_offset;
+    int _v_offset_orig;
     int _type;
     std::list<int> _index_list;
     int _sec_index;

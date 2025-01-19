@@ -79,7 +79,7 @@ private:
 	static const int RulerHeight;
 
 	static const int MaxScrollValue;
-    static const int MaxHeightUnit;
+    static const int HeightUnit;
 
 public:
     //static const int SignalHeight;

@@ -61,10 +61,9 @@ const int View::LabelMarginWidth = 70;
 const int View::RulerHeight = 50;
 
 const int View::MaxScrollValue = INT_MAX / 2;
-const int View::MaxHeightUnit = 20;
+const int View::HeightUnit = 20; // also serves as minimum signal height
 
-//const int View::SignalHeight = 30;s
-const int View::SignalMargin = 7;
+const int View::SignalMargin = 3;
 const int View::SignalSnapGridSize = 10;
 
 const QColor View::CursorAreaColour(220, 231, 243);
@@ -107,6 +106,9 @@ View::View(SigSession *session, pv::toolbars::SamplingBar *sampling_bar, QWidget
    _device_agent = session->get_device();
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+//    setWidgetResizable(true);
+//    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   
     // trace viewport map
     _trace_view_map[SR_CHANNEL_LOGIC] = TIME_VIEW;
@@ -607,7 +609,7 @@ void View::update_scroll()
     assert(_viewcenter);
 
     int width = get_view_width();
-    if (width == 0){
+    if (width == 0) {
         return;
     }
 
@@ -632,11 +634,28 @@ void View::update_scroll()
             _offset * 1.0  / length * MaxScrollValue);
 	}
 
-	_updating_scroll = false;
+    // Set up vertical scrollbar
+    std::vector<Trace*> traces;
+    get_traces(ALL_VIEW, traces);
 
-	// Set the vertical scrollbar
-	verticalScrollBar()->setPageStep(areaSize.height());
-    verticalScrollBar()->setRange(0,0);
+    // Calculate total required height for all traces
+    int total_height = 0;
+    for (auto t : traces) {
+        if (t->enabled())
+            total_height += t->get_totalHeight() + 2 * SignalMargin;
+    }
+
+    // Make sure we can scroll the last signal past the status bar
+    total_height += StatusHeight;
+
+    // Enable vertical scrolling if total height exceeds viewport
+    if (total_height > areaSize.height()) {
+        verticalScrollBar()->setRange(0, total_height - areaSize.height());
+        verticalScrollBar()->setPageStep(areaSize.height());
+    } else {
+        verticalScrollBar()->setRange(0, 0);
+    }
+    _updating_scroll = false;
 }
 
 void View::update_scale_offset()
@@ -678,7 +697,7 @@ void View::signals_changed(const Trace* eventTrace)
     double actualMargin = SignalMargin;
     int total_rows = 0;
     int label_size = 0;
-    uint8_t max_height = MaxHeightUnit;
+    uint8_t max_height = HeightUnit;
     std::vector<Trace*> time_traces;
     std::vector<Trace*> fft_traces;
     std::vector<Trace*> traces;
@@ -759,22 +778,21 @@ void View::signals_changed(const Trace* eventTrace)
 
             ret = _device_agent->get_config_byte(SR_CONF_MAX_HEIGHT_VALUE, v);
             if (ret) {
-                max_height = (v + 1) * MaxHeightUnit;
+                max_height = (v + 1) * HeightUnit;
             }
-
             if (height < 2*actualMargin) {
-                actualMargin /= 2;
-                _signalHeight = max(1.0, (_time_viewport->height()
+                //actualMargin /= 2;
+                _signalHeight = max((double)HeightUnit, (_time_viewport->height()
                                           - 2 * actualMargin * label_size) * 1.0 / total_rows);
             }
             else {
-                _signalHeight = (height >= max_height) ? max_height : height;
+                _signalHeight = max((double)HeightUnit, (height >= max_height) ? max_height : height);
             }
         }
         else if (_device_agent->get_work_mode() == DSO) {
-            _signalHeight = (_header->height()
+            _signalHeight = max((double)HeightUnit, (_header->height()
                              - horizontalScrollBar()->height()
-                             - 2 * actualMargin * label_size) * 1.0 / total_rows;
+                             - 2 * actualMargin * label_size) * 1.0 / total_rows);
         }
         else {
             _signalHeight = (int)((height <= 0) ? 1 : height);
@@ -967,8 +985,17 @@ void View::h_scroll_value_changed(int value)
 
 void View::v_scroll_value_changed(int value)
 {
-    (void)value;
-	_header->update();
+    // Update vertical positions of all traces based on scroll value
+    std::vector<Trace*> traces;
+    get_traces(ALL_VIEW, traces);
+
+    for (auto t : traces) {
+        if (t->enabled()) {
+            t->update_v_scroll(-value);
+        }
+    }
+
+    _header->update();
     viewport_update();
 }
 

@@ -557,7 +557,7 @@ bool MainFrame::eventFilter(QObject *object, QEvent *event)
             }
 
             if (r != l){
-                SetFormRegion(l, t, r-l, b-t);
+                SetFormRegion(l, t, r-l+1, b-t+1);
                 #ifndef _WIN32
                     saveNormalRegion();
                 #endif
